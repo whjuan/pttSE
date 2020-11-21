@@ -25,7 +25,7 @@ Vue.use(VueRouter)
   {
     path: '/o',
     name: 'ObserveList',
-    components: ObserveList 
+    component: ObserveList 
   }
 ]
 

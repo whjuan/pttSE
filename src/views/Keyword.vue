@@ -7,7 +7,9 @@
 
   <div>
     <Searchbar/>
-    <Filter/>
+    <test/>
+    <result/>
+   
    </div> 
   </div> 
     
@@ -19,13 +21,17 @@
 
 <script>
 import Searchbar from '@/components/Searchbar.vue'
-import Filter from '@/components/Filter.vue'
+import Test from '@/components/test.vue'
+import Result from '@/components/Result.vue'
+
 
 export default {
   name: "Keyword",
   components: { 
     Searchbar,
-    Filter
+    Test,
+    Result,
+    
   },
 }
  

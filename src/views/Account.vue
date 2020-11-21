@@ -7,7 +7,13 @@
 
   <div>
     <Searchbar/>
-    <Filter/>
+      <p></p>
+      <div> Qbey 之發文紀錄：</div>
+      <test/>
+
+      <IDsearch/>
+
+
    </div> 
   </div> 
     
@@ -20,13 +26,18 @@
 
 <script>
 import Searchbar from '@/components/Searchbar.vue'
-import Filter from '@/components/Filter.vue'
+import Test from '@/components/test.vue'
+import IDsearch from '@/components/IDsearch.vue'
 
 export default {
   name: "Account",
   components: { 
     Searchbar,
-    Filter
+    Test,
+    IDsearch,
+    
+  
+
   },
 }
  
