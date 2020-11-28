@@ -6,7 +6,13 @@
   </div>
   <div>
       
-      <form>
+      <GetInput
+        @getInput="getInput" 
+        :inputPlaceholder="inputPlaceholder"
+        :buttonText="buttonText">
+      </GetInput>
+
+      <!--<form>
         <div class="row mt-5">
           <div class="col-10 pr-0">
             <input type="text" class="form-control" placeholder="輸入ID" v-model="id">
@@ -16,7 +22,7 @@
           </div>
          
         </div>
-      </form>
+      </form>-->
 
       <br>
       <br>
@@ -61,18 +67,38 @@
 </style>
 
 <script>
-
+import GetInput from "@/components/GetInput.vue"
 var rows = []
 
   export default {
     name: 'ObserveList',
+    components: { 
+      GetInput,
+    },
     data() {
       return {
         obs_id: rows,
+        id: '',
+        inputPlaceholder: '輸入ID', //  GetInput components
+        buttonText: '新增觀察', //  GetInput components
       }
     },
     methods:{
-      addRow(id) {
+      getInput(data) {  //  GetInput components
+        this.id = data;
+
+        if(this.id == undefined){ //  確認有沒有此 ID
+          alert('此 ID 不存在');
+        }
+        else if(rows.includes(this.id)){
+          alert('此 ID 已在觀察名單內');
+        }
+        else{
+          rows.push(this.id);
+        }
+
+      },
+      /*addRow(id) {
         if(id == undefined){ //  確認有沒有此 ID
           alert('此 ID 不存在');
         }
@@ -82,7 +108,7 @@ var rows = []
         else{
           rows.push(id);
         }
-      },
+      },*/
       deleteRow(id) {
         var yes = confirm('確定移除 '+ id +' 嗎？');  //  確認是否刪除
         if(yes){
