@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Account from '@/views/Account.vue'
 import Keyword from '@/views/Keyword.vue'
 import ObserveList from '@/views/ObserveList.vue'
+import ViewRecords from '@/views/ViewRecords.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,11 @@ Vue.use(VueRouter)
     path: '/o',
     name: 'ObserveList',
     component: ObserveList 
+  },
+  {
+    path: '/o/:id',
+    name: 'ViewRecords',
+    component: ViewRecords 
   }
 ]
 
