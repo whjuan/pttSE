@@ -1,13 +1,14 @@
 <template>
 
   <div>
+    <div class="mt-5"> {{ tableTitle }} </div>
+
+    <br>
+
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>看板</th>
-          <th>日期</th>
-          <th>標題</th>
-          <th>類型</th>
+          <th v-for="cName in columnName" :key="cName"> {{ cName }} </th>
         </tr>
       </thead>
   
@@ -38,6 +39,8 @@
   export default {
     name: "IDResult",
     props: {
+      tableTitle: String,
+      columnName: Array,
       data: Array,
     },
   }

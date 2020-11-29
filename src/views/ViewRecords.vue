@@ -1,12 +1,14 @@
 <template>
   <div>
     <div class="container">
-      <div class="mt-5"> {{ id }} 之發文紀錄：</div>
+      <!--<div class="mt-5"> {{ id }} 之發文紀錄：</div>
 
       <br>
-      <br>
+      <br>-->
 
       <IDResult
+        :tableTitle="tableTitle"
+        :columnName="columnName"
         :data="data">
       </IDResult>
       
@@ -28,6 +30,8 @@ import IDResult from '@/components/IDResult.vue';
     },
     data(){
       return{
+        tableTitle: this.$route.params.id + ' 之發文紀錄：',
+        columnName: ['看板', '日期', '標題', '類型'],
         data:[
           {
             "article_id":"",
