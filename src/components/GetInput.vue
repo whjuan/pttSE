@@ -6,7 +6,7 @@
         <input type="text" class="form-control" :placeholder="[[inputPlaceholder]]" v-model="input">
       </div>
       <div class="col-2">
-        <button type="button" class="btn btn-primary" @click="setInput"> {{ buttonText }} </button>  <!--v-on:click="addRow(id)"-->
+        <button type="button" class="btn btn-primary" @click="setInput"> {{ buttonText }} </button>
       </div>
       
     </div>

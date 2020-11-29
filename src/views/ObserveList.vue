@@ -1,29 +1,28 @@
 <template>
- <div>
-  <div class="container">
-  <div class="mt-5">
-    新增觀察ID
-  </div>
   <div>
-      
-      <GetInput
-        @getInput="getInput" 
-        :inputPlaceholder="inputPlaceholder"
-        :buttonText="buttonText">
-      </GetInput>
+    <div class="container">
+      <div class="mt-5">
+        新增觀察ID
+      </div>
+      <div>
+          
+          <GetInput
+            @getInput="getInput" 
+            :inputPlaceholder="inputPlaceholder"
+            :buttonText="buttonText">
+          </GetInput>
 
-      <br>
-      <br>
+          <br>
+          <br>
 
-      <ObserveTable
-        @deleteRow="deleteRow"
-        :obs_id="obs_id">
-      </ObserveTable>
-    
-   </div> 
-  </div> 
-    
- </div>
+          <ObserveTable
+            @deleteRow="deleteRow"
+            :obs_id="obs_id">
+          </ObserveTable>
+        
+      </div> 
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -65,7 +64,7 @@
         }
 
       },
-      deleteRow(id) {
+      deleteRow(id) { //  ObserveTable components
         var yes = confirm('確定移除 '+ id +' 嗎？');  //  確認是否刪除
         if(yes){
           for( var i = 0; i < rows.length; i++){
