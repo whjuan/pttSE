@@ -15,10 +15,11 @@
 
       <tbody>
         <tr v-for="item in tableData" :key="item">
-          <td> {{ item.board }}</td>
-          <td> {{ item.date }}</td>
+          <td> {{ item.user_id }} </td>
+          <td> {{ item.board }} </td>
+          <td> {{ item.date }} </td>
           <td> <a target="_blank" :href=item.article_url>{{ item.article_title }}</a> </td>
-          <td> {{ item.type }}</td>
+          <td> {{ item.type }} </td>
         </tr>
       </tbody>
 
