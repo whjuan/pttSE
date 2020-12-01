@@ -47,7 +47,6 @@ export default {
       startDate: '',
       endDate: '',
       msg: '',
-      hasDate: false,
       tableTitle: '',
       columnName: [],
       tableData: [],
@@ -55,7 +54,7 @@ export default {
         {
           "user_id":"deepinheart",
           "board":"Gossipping",
-          "date":"1605456000000", // 2020/11/16
+          "date":"1605456000", // 2020/11/16
           "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1605540889.A.C5C.html",
           "article_title":"Re: [新聞] 川普律師鮑威爾：擬在多州翻轉大選結果",
           "type":"發文",
@@ -63,7 +62,7 @@ export default {
         {
           "user_id":"s0930194",
           "board":"Gossipping",
-          "date":"1605456000000",
+          "date":"1605456000",
           "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1605540889.A.C5C.html",
           "article_title":"Re: [新聞] 川普律師鮑威爾：擬在多州翻轉大選結果",
           "type":"噓文",
@@ -71,7 +70,7 @@ export default {
         {
           "user_id":"YingJiou5566",
           "board":"Gossipping",
-          "date":"1605456000000",
+          "date":"1605456000",
           "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1605540889.A.C5C.html",
           "article_title":"Re: [新聞] 川普律師鮑威爾：擬在多州翻轉大選結果",
           "type":"推文",
@@ -79,7 +78,7 @@ export default {
         {
           "user_id":"uhbygv45",
           "board":"Gossipping",
-          "date":"1605456000000",
+          "date":"1605456000",
           "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1605540889.A.C5C.html",
           "article_title":"Re: [新聞] 川普律師鮑威爾：擬在多州翻轉大選結果",
           "type":"推文",
@@ -87,7 +86,7 @@ export default {
         {
           "user_id":"lcbshadow",
           "board":"Gossipping",
-          "date":"1605456000000",
+          "date":"1605456000",
           "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1605540889.A.C5C.html",
           "article_title":"Re: [新聞] 川普律師鮑威爾：擬在多州翻轉大選結果",
           "type":"推文",
@@ -95,7 +94,7 @@ export default {
         {
           "user_id":"wfelix",
           "board":"Gossipping",
-          "date":"1605456000000",
+          "date":"1605456000",
           "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1605540889.A.C5C.html",
           "article_title":"Re: [新聞] 川普律師鮑威爾：擬在多州翻轉大選結果",
           "type":"推文",
@@ -103,7 +102,7 @@ export default {
         {
           "user_id":"u8809048",
           "board":"Gossipping",
-          "date":"1605456000000",
+          "date":"1605456000",
           "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1605540889.A.C5C.html",
           "article_title":"Re: [新聞] 川普律師鮑威爾：擬在多州翻轉大選結果",
           "type":"推文",
@@ -111,7 +110,7 @@ export default {
         {
           "user_id":"extemjin",
           "board":"Gossipping",
-          "date":"1605456000000",
+          "date":"1605456000",
           "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1605539935.A.510.html",
           "article_title":"[新聞] 川普律師：Dominion操縱選舉 將公開證據",
           "type":"發文",
@@ -120,6 +119,13 @@ export default {
     }
   },
   methods:{
+    dateToTimestamp(date){  // timestamp 單位為秒
+      return Date.parse(date+'T00:00:00') / 1000;
+    },
+    timestampToDate(timestamp){
+      var date = new Date(Number(timestamp) * 1000).toLocaleString();
+      return date.split(" ")[0];
+    },
     checkSearch(input ,startDate, endDate){
       if(input == undefined || input == ''){
         return '此關鍵字不存在';
@@ -131,13 +137,13 @@ export default {
         if(startDate > endDate)
           return '左邊為開始日期要小於結束日期';
         this.hasDate = true;
-        return 'ok';
+        return 'hasDate';
       }
-      return 'ok';
+      return 'noDate';
     },
     getSearch(input, startDate, endDate) {  //  input為使用者輸入的文字
       this.msg = this.$options.methods.checkSearch(input, startDate, endDate);
-      if(this.msg != 'ok'){
+      if(this.msg != 'hasDate' && this.msg != 'noDate'){
         this.tableTitle = '';
         this.columnName = '';
         this.tableData = [];
@@ -145,16 +151,16 @@ export default {
       }
       else{
         this.input = input;
-        if(this.hasDate){
+        if(this.msg == 'hasDate'){
           this.startDate = startDate;
           this.endDate = endDate;
-          this.startTimestamp = Date.parse(this.startDate+'T00:00:00'); //毫秒
-          this.endTimestamp = Date.parse(this.endDate+'T00:00:00');
+          this.startTimestamp = this.$options.methods.dateToTimestamp(this.startDate); // 秒
+          this.endTimestamp = this.$options.methods.dateToTimestamp(this.endDate);
         }
         
         //  將資料的 date 從 timestep 轉成 一般的 date
         for(var i=0;i<this.data.length;i++){
-          this.data[i]['date'] = new Date(Number(this.data[i]['date'])).toLocaleString().split(" ")[0];
+          this.data[i]['date'] = this.$options.methods.timestampToDate(this.data[i]['date']);
         }
 
         //  搜尋結果的資料
