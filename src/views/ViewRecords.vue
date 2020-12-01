@@ -9,7 +9,7 @@
       <IDResult
         :tableTitle="tableTitle"
         :columnName="columnName"
-        :data="data">
+        :tableData="tableData">
       </IDResult>
       
     </div>
@@ -32,7 +32,7 @@ import IDResult from '@/components/IDResult.vue';
       return{
         tableTitle: this.$route.params.id + ' 之發文紀錄：',
         columnName: ['看板', '日期', '標題', '類型'],
-        data:[
+        tableData:[
           {
             "article_id":"",
             "article_url":"https://www.ptt.cc/bbs/Gossiping/M.1596208414.A.60E.html",
