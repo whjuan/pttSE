@@ -2,7 +2,6 @@
   <div>
     <Header/>
     <router-view></router-view>
-    <router-view name="Chart"></router-view>
     <!-- <Footer/> -->
   </div>
 </template>
