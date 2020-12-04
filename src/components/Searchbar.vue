@@ -17,7 +17,8 @@
         <br>
         <input type="date" id="date" v-model="startDate"> ~ <input type="date" id="date" v-model="endDate">
       </div>
-
+       
+    
     </div>
   </form>
 
@@ -38,10 +39,15 @@
       inputPlaceholder: String,
       buttonText: String,
     },
+   
     methods: {
       setSearch() {
         this.$emit('getSearch', this.input, this.startDate, this.endDate);
-      }
+        console.log(this.startDate)
+      },
+      
+      // input,star_tdate,end_date回傳 call api
+    
     }
   }
 </script>

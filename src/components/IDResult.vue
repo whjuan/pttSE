@@ -43,5 +43,25 @@
       columnName: Array,
       tableData: Array,
     },
+    methods:{
+      get_url_query(uri){
+     
+
+      },
+
+
+    },
+    // mounted(){
+    // let nanachi = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-1F2B5846-35EB-42DD-B3C3-4084A4709AA4"
+    // this.$http.get(nanachi).then(r => {
+    //   console.log(r)
+    //   //console.log(r.data.records.location[0].locationName)
+    // }).catch( r => {
+    //   console.log(r)
+    // })
+ // }
+
+    
   }
+  
 </script>

@@ -19,7 +19,7 @@
       :tableData="tableData">
     </IDResult>
   </div> 
-
+    
   </div> 
     
  </div>
@@ -40,6 +40,7 @@ export default {
     IDResult,
   },
   data() {
+    const url = "http://0.0.0.0/"
     return {
       inputPlaceholder: '輸入',
       buttonText: 'Search',
@@ -106,23 +107,32 @@ export default {
         return 'hasDate';
       }
       return 'noDate';
+      console.log('checkover')
     },
     getSearch(input, startDate, endDate) {  //  input為使用者輸入的文字
+      
+      
+
       this.msg = this.$options.methods.checkSearch(input, startDate, endDate);
       if(this.msg != 'hasDate' && this.msg != 'noDate'){
         this.tableTitle = '';
         this.columnName = '';
         this.tableData = [];
         alert(this.msg);
+        
       }
       else{
         this.input = input;
+        
         if(this.msg == 'hasDate'){
           this.startDate = startDate;
           this.endDate = endDate;
           this.startTimestamp = this.$options.methods.dateToTimestamp(this.startDate); // 秒
           this.endTimestamp = this.$options.methods.dateToTimestamp(this.endDate);
+           
         }
+        
+        
         
         //  將資料的 date 從 timestep 轉成 一般的 date
         for(var i = 0 ; i < this.data.length ; i++){
@@ -133,9 +143,30 @@ export default {
         this.tableTitle = input + ' 之發文紀錄：';
         this.columnName = ['看板', '日期', '標題', '類型'],
         this.tableData = this.data;
+        
+
+        let url ="0.0.0.0/api/GetByUserId?user_id="+this.input
+         if(this.msg=='hasDate'){
+            url = url+"&start="+this.startTimestamp+"&end="+this.endTimestamp
+         } 
+        console.log(url)
+        //var res = encodeURI(url); 
+        //url = "https://"+res
+        console.log(url)
+        this.$eventBus.$emit('get_url_query',this.url)
       }
-    }
+    },
+    
   },
+  // mounted(){
+  //   let nanachi = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-1F2B5846-35EB-42DD-B3C3-4084A4709AA4"
+  //   this.$http.get(nanachi).then(r => {
+  //     console.log(r)
+  //     console.log(r.data.records.location[0].locationName)
+  //   }).catch( r => {
+  //     console.log(r)
+  //   })
+  // }
 }
  
 </script>

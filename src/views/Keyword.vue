@@ -165,8 +165,18 @@ export default {
 
         //  搜尋結果的資料
         this.tableTitle = input + ' 之發文紀錄：';
-        this.columnName = ['作者帳號', '看板', '日期', '標題', '類型'],
-        this.tableData = this.data;
+        this.columnName = ['作者帳號', '看板', '日期', '標題', '類型']
+        //this.tableData = this.data;
+
+        let url ="0.0.0.0/api/GetByUserId?content="+this.input
+         if(this.msg=='hasDate'){
+            url = url+"&start="+this.startTimestamp+"&end="+this.endTimestamp
+         } 
+        console.log(url)
+        var res = encodeURI(url); 
+        url = "https://"+res
+        console.log(url)
+
       }
     }
   }
