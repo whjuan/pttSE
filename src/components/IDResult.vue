@@ -16,9 +16,9 @@
       <tbody>
         <tr v-for="item in tableData" :key="item">
           <td> {{ item.board }}</td>
-          <td> {{ item.date }}</td>
-          <td> <a target="_blank" :href=item.article_url>{{ item.article_title }}</a> </td>
-          <td> {{ item.type }}</td>
+          <td> {{ new Date(Number(item.date) * 1000).toLocaleString().split(" ")[0] }}</td>
+          <td> <a target="_blank" :href="item.article_url">{{ item.article_title }}</a> </td>
+          <td> {{ item.comment_tag }} : {{ item.content }}</td>
         </tr>
       </tbody>
 
@@ -38,28 +38,39 @@
 <script>
   export default {
     name: "IDResult",
+    data(){
+      return {
+        arr: []
+      }
+    },
     props: {
       tableTitle: String,
       columnName: Array,
-      tableData: Array,
     },
-    methods:{
-      get_url_query(uri){
-     
-
-      },
-
-
+    computed: {
+      tableData: function(){ return this.arr }
     },
-    // mounted(){
-    // let nanachi = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-1F2B5846-35EB-42DD-B3C3-4084A4709AA4"
-    // this.$http.get(nanachi).then(r => {
-    //   console.log(r)
-    //   //console.log(r.data.records.location[0].locationName)
-    // }).catch( r => {
-    //   console.log(r)
-    // })
- // }
+    mounted(){
+      this.$eventBus.$on('AccountUrlBus',p =>{
+        console.log("p= " + p)
+        this.$http.get(p, { headers:{
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+        }}).then(r => {
+          // console.log("Http response has been recieved")
+          // console.log("Success")
+          // console.log(r)
+          this.arr = r.data.hits.map(e => {
+            return e._source
+          })
+        }).catch( r => {
+          // console.log("Http response has been recieved")
+          // console.log("Error")
+          // console.log(r)
+        })
+      })
+    }  
 
     
   }

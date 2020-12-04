@@ -9,7 +9,7 @@
         <button type="button" class="btn btn-primary" @click="setSearch"> {{ buttonText }} </button>
       </div>
       
-     
+
       <div class="col-10 pr-0">
         <div class="mt-5">
           選擇日期區間
@@ -17,7 +17,7 @@
         <br>
         <input type="date" id="date" v-model="startDate"> ~ <input type="date" id="date" v-model="endDate">
       </div>
-       
+      
     
     </div>
   </form>
@@ -39,7 +39,7 @@
       inputPlaceholder: String,
       buttonText: String,
     },
-   
+    
     methods: {
       setSearch() {
         this.$emit('getSearch', this.input, this.startDate, this.endDate);
@@ -48,6 +48,7 @@
       
       // input,star_tdate,end_date回傳 call api
     
-    }
+    },
+
   }
 </script>
