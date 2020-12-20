@@ -1,11 +1,22 @@
 <template>
   <div>
     <div class="container">
-      <p class="mt-5" v-if="route=='Account'">alonelykid stinger5009 帳號查詢</p>
-      <p class="mt-5" v-else-if="route=='Keyword'">鬼滅 關鍵字查詢</p>
+      <p class="mt-5" v-if="route=='Account'">帳號查詢 (Ex. alonelykid stinger5009) </p>
+      <p class="mt-5" v-else-if="route=='Keyword'">關鍵字查詢 (Ex. 鬼滅 聖誕)</p>
       <div>
         <SearchingBar @3param="urlMaker"></SearchingBar>
-        <Result :arr="arr" :input="input"></Result>
+        <Result 
+          :tableData="tableData"
+          :input="input">
+        </Result>
+        <Pagination
+          :prevText="prevText"
+          :nextText="nextText"
+          :linkClass="linkClass"
+          @updatePage="filterByPageNum"
+          :pageNum="pageNum"
+          :totalPageCount="totalPageCount">
+        </Pagination>
       </div> 
     </div> 
   </div>
@@ -18,17 +29,27 @@
 <script>
 import SearchingBar from '@/components/SearchingBar.vue'
 import Result from '../components/Result.vue'
+import Pagination from '../components/Pagination.vue';
 
 export default {
   name: "Account",
   components: { 
     SearchingBar,
-    Result
+    Result,
+    Pagination,
   },
   data() {
     return {
-      arr: [],
-      input: ''
+      input: '',
+      requestUrl: '',
+      tableData: [],
+      //  分頁需要用到的參數
+      prevText: '',
+      nextText: '',
+      linkClass: '',
+      rowsPerPage: 10,
+      pageNum: 1,
+      totalPageCount: 0,
     }
   },
   computed: {
@@ -42,7 +63,32 @@ export default {
         "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
       }}).then(r => {
           // console.log(r)
-          this.arr = r.data.hits.map(e => { return e })
+          this.tableData = r.data.hits.map(e => { return e })
+
+          if(this.route === "Account"){
+            if(this.tableData.length == 0){
+              alert('此帳號不存在');
+            }
+            else{
+              // 分頁顯示
+              this.prevText = 'Prev';
+              this.nextText = 'Next';
+              this.linkClass = 'page-link';
+              this.totalPageCount = Math.ceil(r.data.total.value / this.rowsPerPage);
+            }
+          }
+          else if(this.route === "Keyword"){
+            if(this.tableData.length == 0){
+              alert('此關鍵字不存在');
+            }
+            else{
+              // 分頁顯示
+              this.prevText = 'Prev';
+              this.nextText = 'Next';
+              this.linkClass = 'page-link';
+              this.totalPageCount = Math.ceil(r.data.total.value / this.rowsPerPage);
+            }
+          }
       }).catch( r => console.log(r) )
     },
 
@@ -54,7 +100,13 @@ export default {
       url = url + input
       if(isNaN(d1) && isNaN(d2)) url = url + "&start=none&end=none"
       else url = url + "&start=" + d1 + "&end=" + d2
+      this.requestUrl = url
+      url = url + "&size=" + this.rowsPerPage + "&from=0"
       this.requestSender(url)
+    },
+    filterByPageNum(num){
+      this.pageNum = num;
+      this.requestSender(this.requestUrl + "&size=" + this.rowsPerPage + "&from=" + this.rowsPerPage * (num - 1))
     },
   },
 }
