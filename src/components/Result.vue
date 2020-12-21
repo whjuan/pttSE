@@ -16,21 +16,23 @@
   
 
       <tbody v-if="route=='Account' || route=='ViewRecords'">
-        <tr v-for="item in arr" :key="item._id">
+        <tr v-for="item in tableData" :key="item._id">
           <td>{{ item._source.board }}</td>
           <td>{{ new Date(Number(item._source.date) * 1000).toLocaleString().split(" ")[0] }}</td>
           <td><a target="_blank" :href="item._source.article_url">{{ item._source.article_title }}</a> </td>
-          <td>{{ item._source.comment_tag }} : {{ item._source.content }}</td>
+          <td v-if="item._source.content.length <= 25">{{ item._source.comment_tag }} : {{ item._source.content }}</td>
+          <td v-if="item._source.content.length > 25">{{ item._source.comment_tag }} : {{ item._source.content.substr(0, 25) + ' . . .' }}</td>
         </tr>
       </tbody>
 
       <tbody v-else-if="route=='Keyword'">
-        <tr v-for="item in arr" :key="item._id">
+        <tr v-for="item in tableData" :key="item._id">
           <td>{{ item._source.user_id }}</td>
           <td>{{ item._source.board }}</td>
           <td>{{ new Date(Number(item._source.date) * 1000).toLocaleString().split(" ")[0] }}</td>
           <td><a target="_blank" :href="item._source.article_url">{{ item._source.article_title }}</a> </td>
-          <td>{{ item._source.comment_tag }} : {{ item._source.content }}</td>
+          <td v-if="item._source.content.length <= 20">{{ item._source.comment_tag }} : {{ item._source.content }}</td>
+          <td v-if="item._source.content.length > 20">{{ item._source.comment_tag }} : {{ item._source.content.substr(0, 20) + ' . . .' }}</td>
         </tr>
       </tbody>
 
@@ -58,7 +60,7 @@
       route: function(){ return this.$route.name },
     },
     props: {
-      arr: Array,
+      tableData: Array,
       input: String,
     },
   }
