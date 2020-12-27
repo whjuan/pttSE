@@ -6997,6 +6997,11 @@ vue-loader@^15.9.2:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-loading-overlay@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/vue-loading-overlay/-/vue-loading-overlay-3.4.2.tgz#34792a83218df1d35dff50121ce9fac2114f1c38"
+  integrity sha512-xcB+NPjl76eA0uggm707x3ZFgrNosZXpynHipyS3K+rrK1NztOV49R1LY+/4ij5W1KYANp7eRI2EIHrxCpmWAw==
+
 vue-router@^3.2.0:
   version "3.4.9"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.4.9.tgz#c016f42030ae2932f14e4748b39a1d9a0e250e66"
@@ -7027,6 +7032,11 @@ vue@^2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
+
+vuejs-paginate@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/vuejs-paginate/-/vuejs-paginate-2.1.0.tgz#93e1ad1539b713a688c7a2d3080bda60fcc6c77d"
+  integrity sha512-gnwyXlmCiDOu9MLWxN5UJ4PGijKGNOMpHG8ujsrynCzTJljn/rp7Jq0WiDGDAMi5/u0AHuYIHhced+tUW4jblA==
 
 watchpack-chokidar2@^2.0.1:
   version "2.0.1"

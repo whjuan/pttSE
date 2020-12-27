@@ -4,11 +4,16 @@
       <p class="mt-5" v-if="route=='Account'">帳號查詢 (Ex. alonelykid stinger5009) </p>
       <p class="mt-5" v-else-if="route=='Keyword'">關鍵字查詢 (Ex. 鬼滅 聖誕)</p>
       <div>
+        <loading :active.sync="isLoading" 
+        :can-cancel="true" 
+        :is-full-page="fullPage"></loading>
         <SearchingBar @3param="urlMaker"></SearchingBar>
         <Result 
           :tableData="tableData"
           :input="input">
+         
         </Result>
+         
         <Pagination
           :prevText="prevText"
           :nextText="nextText"
@@ -17,6 +22,10 @@
           :pageNum="pageNum"
           :totalPageCount="totalPageCount">
         </Pagination>
+
+
+       
+
       </div> 
     </div> 
   </div>
@@ -30,6 +39,10 @@
 import SearchingBar from '@/components/SearchingBar.vue'
 import Result from '../components/Result.vue'
 import Pagination from '../components/Pagination.vue';
+// Import component
+import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
   name: "Account",
@@ -37,6 +50,7 @@ export default {
     SearchingBar,
     Result,
     Pagination,
+    Loading,
   },
   data() {
     return {
@@ -50,6 +64,8 @@ export default {
       rowsPerPage: 10,
       pageNum: 1,
       totalPageCount: 0,
+      isLoading: false,
+      fullPage: true
     }
   },
   computed: {
@@ -57,6 +73,7 @@ export default {
   },
   methods:{
     requestSender(url){
+      this.isLoading = true;
       this.$http.get(url, { headers:{
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
@@ -64,7 +81,7 @@ export default {
       }}).then(r => {
           // console.log(r)
           this.tableData = r.data.hits.map(e => { return e })
-
+          this.isLoading = false //Loading overlay
           if(this.route === "Account"){
             if(this.tableData.length == 0){
               alert('此帳號不存在');
@@ -89,10 +106,13 @@ export default {
               this.totalPageCount = Math.ceil(r.data.total.value / this.rowsPerPage);
             }
           }
+          
       }).catch( r => console.log(r) )
+     
     },
 
     urlMaker(input,d1, d2){
+      this.isLoading = true;
       this.input = input
       var url = "http://140.120.182.87:6003/api/"
       if(this.route === "Keyword") url = url + "GetByContent?content="

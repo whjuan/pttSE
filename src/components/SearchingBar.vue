@@ -3,6 +3,7 @@
   <form>
     <div class="row mt-5">
       <div class="col-10 pr-0">
+       
         <input type="text" class="form-control" placeholder="請輸入" v-model="input">
       </div>
       <div class="col-2">
@@ -11,9 +12,12 @@
 
       <div class="col-10 pr-0">
         <p class="mt-5">選擇日期區間</p>
-        <input type="date" v-model="startDate">
-        ~ 
+        <input type="date" v-model="startDate"> 
         <input type="date" v-model="endDate">
+        
+       <div class="col-10 pr-0">
+       <button type="button" class="btn btn-danger row mt-3" v-on:click= "startDate='' ,endDate=''">Reset Date</button>
+       </div>
       </div>
     
     </div>
@@ -30,6 +34,10 @@
 
 
 <script>
+  //  // Import component
+  //   import Loading from 'vue-loading-overlay';
+  //   // Import stylesheet
+  //   import 'vue-loading-overlay/dist/vue-loading.css';
   export default {
     name: "Searchbar",
     data(){
@@ -38,7 +46,8 @@
         startDate: '',
         endDate: '',
         d1: 0,
-        d2: 0
+        d2: 0,
+        input_clean:''
       }
     },
     props: {
@@ -75,7 +84,8 @@
       },
       setSearch() {
         if(this.checkSearch() === true){
-          this.$emit('3param', this.input, this.d1, this.d2);
+          this.input_clean = this.input.trim();
+          this.$emit('3param', this.input_clean, this.d1, this.d2);
         } else{
           alert(this.checkSearch())}
       }
