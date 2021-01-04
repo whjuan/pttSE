@@ -1,6 +1,6 @@
 <template>
   <paginate
-    :value="currentPageCount"
+    :value="pageNum"
     :page-count="totalPageCount"
     :click-handler="changePage"
     :page-range="3"
@@ -29,11 +29,6 @@
     components: {
       Paginate,
     },
-    data() {
-      return {
-        currentPageNum: this.pageNum,
-      }
-    },
     props: {
       prevText: String,
       nextText: String,
@@ -43,7 +38,6 @@
     },
     methods: {
       changePage(num) {
-        this.currentPageNum = num;
         this.$emit('updatePage', num);
       }
     }
