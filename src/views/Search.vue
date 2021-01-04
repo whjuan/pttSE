@@ -62,7 +62,7 @@ export default {
       nextText: '',
       linkClass: '',
       rowsPerPage: 10,
-      pageNum: 1,
+      pageNum: 3,
       totalPageCount: 0,
       isLoading: false,
       fullPage: true
@@ -122,10 +122,11 @@ export default {
       else url = url + "&start=" + d1 + "&end=" + d2
       this.requestUrl = url
       url = url + "&size=" + this.rowsPerPage + "&from=0"
+      this.pageNum = 1
       this.requestSender(url)
     },
     filterByPageNum(num){
-      this.pageNum = num;
+      this.pageNum = num
       this.requestSender(this.requestUrl + "&size=" + this.rowsPerPage + "&from=" + this.rowsPerPage * (num - 1))
     },
   },
