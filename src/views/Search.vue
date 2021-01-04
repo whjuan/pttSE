@@ -123,7 +123,6 @@ export default {
       this.requestUrl = url
       url = url + "&size=" + this.rowsPerPage + "&from=0"
       this.pageNum = 1
-      alert(this.pageNum)
       this.requestSender(url)
     },
     filterByPageNum(num){
