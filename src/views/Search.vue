@@ -10,8 +10,8 @@
         <SearchingBar @3param="urlMaker"></SearchingBar>
         <Result 
           :tableData="tableData"
-          :input="input">
-         
+          :input="input"
+          :totalData="totalData">
         </Result>
          
         <Pagination
@@ -57,6 +57,7 @@ export default {
       input: '',
       requestUrl: '',
       tableData: [],
+      totalData: '',
       //  分頁需要用到的參數
       prevText: '',
       nextText: '',
@@ -87,6 +88,8 @@ export default {
               alert('此帳號不存在');
             }
             else{
+              // 搜尋資料筆數
+              this.totalData = '共 ' + r.data.total.value + ' 筆資料';
               // 分頁顯示
               this.prevText = 'Prev';
               this.nextText = 'Next';
@@ -99,6 +102,8 @@ export default {
               alert('此關鍵字不存在');
             }
             else{
+              // 搜尋資料筆數
+              this.totalData = '共 ' + r.data.total.value + ' 筆資料';
               // 分頁顯示
               this.prevText = 'Prev';
               this.nextText = 'Next';
