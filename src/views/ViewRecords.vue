@@ -3,7 +3,8 @@
     <div class="container">
       <Result 
         :tableData="tableData"
-        :input="input">
+        :input="input"
+        :totalData="totalData">
       </Result>
       <Pagination
           :prevText="prevText"
@@ -37,6 +38,7 @@ import Pagination from '@/components/Pagination.vue';
         input:'',
         tableData: [],
         requestUrl: '',
+        totalData: '',
         //  分頁需要用到的參數
         prevText: '',
         nextText: '',
@@ -70,6 +72,9 @@ import Pagination from '@/components/Pagination.vue';
 
             this.tableHead = ['看板', '日期', '標題', '類型']
             this.tableTitle = this.input + ' 之發文紀錄'
+
+            // 搜尋資料筆數
+            this.totalData = '共 ' + r.data.total.value + ' 筆資料';
             // 分頁顯示
             this.prevText = 'Prev';
             this.nextText = 'Next';

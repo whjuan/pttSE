@@ -6,6 +6,7 @@
                </div> -->
     <p class="mt-5" v-if="route=='Account' || route=='ViewRecords'">{{ input }} 之發文紀錄</p>
     <p class="mt-5" v-else-if="route=='Keyword'">{{ input }} 的相關推文</p>
+    <p class="text-muted"> {{ totalData }} </p>
 
     <table id="result" class="table table-striped">
       <thead>
@@ -70,6 +71,7 @@
     props: {
       tableData: Array,
       input: String,
+      totalData: String,
     },
   }
   
