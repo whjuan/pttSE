@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="container">
-      <p class="mt-5" v-if="route=='Account'">帳號查詢 (Ex. alonelykid stinger5009) </p>
-      <p class="mt-5" v-else-if="route=='Keyword'">關鍵字查詢 (Ex. 鬼滅 聖誕)</p>
+      <p class="mt-5" v-if="route=='Account'">帳號查詢 (範例: alonelykid stinger5009) </p>
+      <p class="mt-5" v-else-if="route=='Keyword'">關鍵字查詢 (範例: 跨年)</p>
       <div>
         <loading :active.sync="isLoading" 
         :can-cancel="true" 
