@@ -86,6 +86,7 @@ export default {
           if(this.route === "Account"){
             if(this.tableData.length == 0){
               alert('此帳號不存在');
+              this.totalData = '共 0 筆資料';
             }
             else{
               // 搜尋資料筆數
@@ -100,6 +101,7 @@ export default {
           else if(this.route === "Keyword"){
             if(this.tableData.length == 0){
               alert('此關鍵字不存在');
+               this.totalData = '共 0 筆資料';
             }
             else{
               // 搜尋資料筆數
