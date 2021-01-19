@@ -76,7 +76,11 @@
 
         if( tempArray.find(e => e==p) ) alert('此 ID 已在觀察名單內')
         else{
-          var url = "http://140.120.182.87:6003/api/GetByUserId?user_id="+ p +"&start=none&end=none"
+          var url = window.location.href
+          url =url.replace("observe","")
+          // var url = "http://140.120.182.87:6003/api/GetByUserId?user_id="+ p +"&start=none&end=none"
+          url = url+"api/GetByUserId?user_id="+ p +"&start=none&end=none"
+          //console.log(url)
           this.$http.get(url, { headers:{
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",

@@ -85,8 +85,8 @@ export default {
           this.isLoading = false //Loading overlay
           if(this.route === "Account"){
             if(this.tableData.length == 0){
-              alert('此帳號不存在');
               this.totalData = '共 0 筆資料';
+              alert('此帳號不存在');  
             }
             else{
               // 搜尋資料筆數
@@ -100,8 +100,9 @@ export default {
           }
           else if(this.route === "Keyword"){
             if(this.tableData.length == 0){
+              this.totalData = '共 0 筆資料';
               alert('此關鍵字不存在');
-               this.totalData = '共 0 筆資料';
+              
             }
             else{
               // 搜尋資料筆數
@@ -121,10 +122,24 @@ export default {
     urlMaker(input,d1, d2){
       this.isLoading = true;
       this.input = input
-      var url = "http://140.120.182.87:6003/api/"
-      if(this.route === "Keyword") url = url + "GetByContent?content="
-      else if(this.route === "Account") url = url + "GetByUserId?user_id="
+      var url
+      //  var url = "http://140.120.182.87:6003/api/"
+      // if(this.route === "Keyword") url = url + "GetByContent?content="
+      // else if(this.route === "Account") url = url + "GetByUserId?user_id="
+      if(this.route === "Keyword") {
+        url =window.location.href
+        url = url.replace("keyword","")
+        console.log(url)
+        
+        url = url + "api/GetByContent?content="
+        console.log(url)
+      }
+      else if(this.route === "Account"){
+        url = window.location.href+"api/"
+        url = url + "GetByUserId?user_id="
+      } 
       url = url + input
+      console.log(url)
       if(isNaN(d1) && isNaN(d2)) url = url + "&start=none&end=none"
       else url = url + "&start=" + d1 + "&end=" + d2
       this.requestUrl = url
