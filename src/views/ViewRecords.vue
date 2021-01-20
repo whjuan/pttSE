@@ -54,13 +54,11 @@ import Pagination from '@/components/Pagination.vue';
        //var url = "http://140.120.182.87:6003/api/GetByUserId?user_id="+ id +"&start=none&end=none" //former call api method
       var url =window.location.href
       url = url.replace("observe/"+id,"")
-      console.log(url)
       url =url+"api/GetByUserId?user_id="+ id +"&start=none&end=none"
-      console.log(url)
       this.requestUrl = url
 
       url = url + "&size=" + this.rowsPerPage + "&from=0"
-      console.log(url)
+      // console.log(url)
       this.requestSender(url)
 
     },

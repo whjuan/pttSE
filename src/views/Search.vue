@@ -123,21 +123,21 @@ export default {
       this.isLoading = true;
       this.input = input
       var url
-      //  var url = "http://140.120.182.87:6003/api/"
-      // if(this.route === "Keyword") url = url + "GetByContent?content="
-      // else if(this.route === "Account") url = url + "GetByUserId?user_id="
-      if(this.route === "Keyword") {
-        url =window.location.href
-        url = url.replace("keyword","")
-        console.log(url)
-        
-        url = url + "api/GetByContent?content="
-        console.log(url)
-      }
-      else if(this.route === "Account"){
-        url = window.location.href+"api/"
-        url = url + "GetByUserId?user_id="
-      } 
+       var url = "http://140.120.182.87:6003/api/"
+      if(this.route === "Keyword") url = url + "GetByContent?content="
+      else if(this.route === "Account") url = url + "GetByUserId?user_id="
+
+      // if(this.route === "Keyword") {
+      //   url =window.location.href
+      //   url = url.replace("keyword","")
+  
+      //   url = url + "api/GetByContent?content="
+      //   // console.log(url)
+      // }
+      // else if(this.route === "Account"){
+      //   url = window.location.href+"api/"
+      //   url = url + "GetByUserId?user_id="
+      // } 
       url = url + input
       console.log(url)
       if(isNaN(d1) && isNaN(d2)) url = url + "&start=none&end=none"

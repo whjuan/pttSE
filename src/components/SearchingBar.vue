@@ -4,7 +4,7 @@
     <div class="row mt-5">
       <div class="col-10 pr-0">
        
-        <input type="text" class="form-control" placeholder="請輸入" v-model="input">
+        <input type="text" class="form-control" placeholder="請輸入" v-model="input" @keydown.enter.prevent="setSearch">
       </div>
       <div class="col-2">
         <button type="button" class="btn btn-primary" @click="setSearch">Search</button>

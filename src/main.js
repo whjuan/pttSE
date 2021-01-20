@@ -5,7 +5,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'bootstrap'
 import './bus.js'
-
+import '@/assets/helpers/reset.css'
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
