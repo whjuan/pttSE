@@ -2,7 +2,7 @@
   <div>
     <div class="container">alonelykid stinger5009
       <p class="mt-5">新增觀察ID</p>
-        <GetInput class="mb-5" @getInput="getInput"></GetInput>
+        <GetInput class="mb-5" @getInput="getInput" ></GetInput>
 
         <table class="table table-striped">
           <thead>
