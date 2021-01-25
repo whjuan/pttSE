@@ -2,8 +2,8 @@
     
   <div>
     <!-- <div class="spinner-border text-primary" role="status">
-              <span class="sr-only">Loading...</span>
-               </div> -->
+      <span class="sr-only">Loading...</span>
+    </div> -->
     <p class="mt-5" v-if="route=='Account' || route=='ViewRecords'">{{ input }} 之發文紀錄</p>
     <p class="mt-5" v-else-if="route=='Keyword'">{{ input }} 的相關推文</p>
     <p class="text-muted"> {{ totalData }} </p>
@@ -53,8 +53,6 @@
 <style lang="scss" scoped>
 
 </style>
-
-
 
 <script>
   export default {
