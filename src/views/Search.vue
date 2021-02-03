@@ -123,7 +123,7 @@ export default {
       this.isLoading = true;
       this.input = input
       var url
-       var url = "http://140.120.182.87:6003/api/"
+      var url = "http://140.120.182.87:6003/api/"
       if(this.route === "Keyword") url = url + "GetByContent?content="
       else if(this.route === "Account") url = url + "GetByUserId?user_id="
 
@@ -138,10 +138,12 @@ export default {
       //   url = window.location.href+"api/"
       //   url = url + "GetByUserId?user_id="
       // } 
+      
       url = url + input
       console.log(url)
       if(isNaN(d1) && isNaN(d2)) url = url + "&start=none&end=none"
       else url = url + "&start=" + d1 + "&end=" + d2
+      
       this.requestUrl = url
       url = url + "&size=" + this.rowsPerPage + "&from=0"
       this.pageNum = 1

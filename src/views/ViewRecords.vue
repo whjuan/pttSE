@@ -51,12 +51,13 @@ import Pagination from '@/components/Pagination.vue';
     mounted(){
       var id = this.$route.params.id
       this.input = id
-       //var url = "http://140.120.182.87:6003/api/GetByUserId?user_id="+ id +"&start=none&end=none" //former call api method
-      var url =window.location.href
-      url = url.replace("observe/"+id,"")
-      url =url+"api/GetByUserId?user_id="+ id +"&start=none&end=none"
-      this.requestUrl = url
+       var url = "http://140.120.182.87:6003/api/GetByUserId?user_id="+ id +"&start=none&end=none" //former call api method
+      // var url =window.location.href
+      // url = url.replace("observe/"+id,"")
+      // url =url+"api/GetByUserId?user_id="+ id +"&start=none&end=none"
 
+
+      this.requestUrl = url
       url = url + "&size=" + this.rowsPerPage + "&from=0"
       // console.log(url)
       this.requestSender(url)
