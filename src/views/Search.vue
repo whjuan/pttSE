@@ -18,7 +18,8 @@
         <Result 
           :tableData="tableData"
           :input="input"
-          :totalData="totalData">
+          :totalData="totalData"
+          :searchTime="searchTime">
         </Result>
 
         <!-- 使用元件顯示資料分頁 -->
@@ -63,6 +64,8 @@ export default {
       input: '',
       tableData: [],
       totalData: '',
+      startTime: 0,
+      searchTime: '',
       //  Pagination 元件需要用到的參數
       prevText: '',
       nextText: '',
@@ -99,6 +102,10 @@ export default {
             else{
               // 設定搜尋資料筆數
               this.totalData = '共 ' + r.data.total.value + ' 筆資料';
+              // 設定搜尋時間(毫秒轉成秒)
+              var endTime = new Date();
+              var time = (endTime.getTime() - startTime.getTime()) / 1000;
+              this.searchTime = '(搜尋時間：' + time + ' 秒)';
               // 設定分頁元件的參數
               this.prevText = 'Prev';
               this.nextText = 'Next';
@@ -116,6 +123,10 @@ export default {
             else{
               // 設定搜尋資料筆數
               this.totalData = '共 ' + r.data.total.value + ' 筆資料';
+              // 設定搜尋時間(毫秒轉成秒)
+              var endTime = new Date();
+              var time = (endTime.getTime() - startTime.getTime()) / 1000;
+              this.searchTime = '(搜尋時間：' + time + ' 秒)';
               // 設定分頁元件的參數
               this.prevText = 'Prev';
               this.nextText = 'Next';
@@ -129,6 +140,7 @@ export default {
     },
     // 取得搜尋資訊並建立 url
     urlMaker(input,d1, d2){
+      this.startTime = new Date();
       this.isLoading = true;
       this.input = input
       var url
